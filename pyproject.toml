@@ -1,0 +1,15 @@
+[project]
+name = "astar"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[build-system]
+requires = ["maturin>1.0"]
+build-backend = "maturin"
+
+[tool.maturin]
+module-name = "a_star.utils"
+

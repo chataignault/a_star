@@ -1,0 +1,10 @@
+[package]
+name = "a_star"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "utils"
+
+[dependencies]
+pyo3 = { version = "0.23.2", features = ["extension-module"] }
