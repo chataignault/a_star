@@ -1,4 +1,8 @@
 /target
 /test
 __pycache__
+
 *.pyd
+
+Cargo.lock
+
