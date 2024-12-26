@@ -78,3 +78,46 @@ fn reconstruct_path<N: Clone + Eq + Hash>(came_from: &HashMap<N, N>, current: &N
     path
 }
 
+#[cfg(test)]
+mod tests {
+   use super::*;
+
+   #[derive(Clone, Eq, PartialEq, Hash, Ord, PartialOrd)]
+   struct Point(i32, i32);
+
+   #[test]
+   fn test_2d_grid() {
+       let start = Point(0, 0);
+       let goal = Point(2, 2);
+
+       // Manhattan distance heuristic
+       let h = |p: &Point| {
+           (goal.0 - p.0).abs() as f64 + 
+           (goal.1 - p.1).abs() as f64
+       };
+
+       // Get valid neighbors
+       let neighbors = |p: &Point| {
+           let mut n = Vec::new();
+           for &(dx, dy) in &[(0,1), (1,0), (0,-1), (-1,0)] {
+               let x = p.0 + dx;
+               let y = p.1 + dy;
+               if x >= 0 && x <= 2 && y >= 0 && y <= 2 {
+                   n.push(Point(x, y));
+               }
+           }
+           n
+       };
+
+       // Distance between adjacent points is 1.0
+       let d = |_: &Point, _: &Point| 1.0;
+
+       let path = a_star(start, goal, neighbors, h, d);
+       assert!(path.is_some());
+       
+       let path = path.unwrap();
+       assert_eq!(path.len(), 5);
+       assert_eq!(path.first(), Some(&Point(0,0)));
+       assert_eq!(path.last(), Some(&Point(2,2)));
+   }
+}
