@@ -1,10 +1,11 @@
 use std::collections::{HashMap, HashSet, BinaryHeap};
 use std::cmp::Ordering;
 use std::hash::Hash;
+use ordered_float::OrderedFloat;
 
 #[derive(Copy, Clone, Eq, PartialEq)]
 struct State<N> {
-    cost: f64,
+    cost: OrderedFloat<f64>,
     node: N,
 }
 
@@ -42,7 +43,7 @@ where
     
     g_score.insert(start.clone(), 0.0);
     f_score.insert(start.clone(), h(&start));
-    open_set.push(State { cost: h(&start), node: start.clone() });
+    open_set.push(State { cost: OrderedFloat(h(&start)), node: start.clone() });
     
     while let Some(State { node: current, .. }) = open_set.pop() {
         if current == goal {
@@ -57,7 +58,7 @@ where
                 g_score.insert(neighbor.clone(), tentative_g_score);
                 let f = tentative_g_score + h(&neighbor);
                 f_score.insert(neighbor.clone(), f);
-                open_set.push(State { cost: f, node: neighbor });
+                open_set.push(State { cost: OrderedFloat(f), node: neighbor });
             }
         }
     }
@@ -82,7 +83,7 @@ fn reconstruct_path<N: Clone + Eq + Hash>(came_from: &HashMap<N, N>, current: &N
 mod tests {
    use super::*;
 
-   #[derive(Clone, Eq, PartialEq, Hash, Ord, PartialOrd)]
+   #[derive(Clone, Eq, PartialEq, Hash, Ord, PartialOrd, Debug)]
    struct Point(i32, i32);
 
    #[test]
@@ -112,7 +113,7 @@ mod tests {
        // Distance between adjacent points is 1.0
        let d = |_: &Point, _: &Point| 1.0;
 
-       let path = a_star(start, goal, neighbors, h, d);
+       let path = a_star(start, goal.clone(), neighbors, h, d);
        assert!(path.is_some());
        
        let path = path.unwrap();
