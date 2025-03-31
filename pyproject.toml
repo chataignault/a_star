@@ -12,4 +12,4 @@ build-backend = "maturin"
 
 [tool.maturin]
 module-name = "a_star.utils"
-
+python-source = "python"

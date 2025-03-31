@@ -4,7 +4,7 @@ use std::collections::{BinaryHeap, HashMap, HashSet};
 use std::hash::Hash;
 
 #[derive(Copy, Clone, Eq, PartialEq)]
-struct State<N> {
+pub struct State<N> {
     cost: OrderedFloat<f64>,
     node: N,
 }
