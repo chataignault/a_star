@@ -5,8 +5,8 @@ use std::hash::Hash;
 
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct State<N> {
-    cost: OrderedFloat<f64>,
-    node: N,
+    pub cost: OrderedFloat<f64>,
+    pub node: N,
 }
 
 impl<N> Ord for State<N>
