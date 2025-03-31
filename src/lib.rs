@@ -39,24 +39,22 @@ fn path_finder(
         node: py_goal.node.extract::<Vec<i32>>(py)?,
     };
 
-    //     let path = a_star::a_star(start, goal, neighbours, h, d);
+    // let path = a_star::a_star(start, goal, neighbours, h, d);
 
     //     let result_node = result_state.node.to_object(py);
     Ok(PyState {
-        node: PyList::new(py, vec![2, 3, 4])?.into(),
+        node: PyList::new(
+            py,
+            vec![PyState::new(PyList::new(py, vec![1, 2])?.into(), 2.)],
+        )?
+        .into(),
         cost: 2.,
     })
-}
-
-#[pyfunction]
-fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
-    Ok((a + b).to_string())
 }
 
 #[pymodule]
 fn utils(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<PyState>()?;
-    m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     m.add_function(wrap_pyfunction!(path_finder, m)?)?;
     Ok(())
 }
