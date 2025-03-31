@@ -111,7 +111,7 @@ mod tests {
             for &(dx, dy) in &[(0, 1), (1, 0), (0, -1), (-1, 0)] {
                 let x = p.0 + dx;
                 let y = p.1 + dy;
-                if x >= 0 && x <= 2 && y >= 0 && y <= 2 {
+                if x.abs() <= goal.0.abs() && y.abs() <= goal.1.abs() {
                     n.push(Point(x, y));
                 }
             }
@@ -125,7 +125,7 @@ mod tests {
         assert!(path.is_some());
 
         let path = path.unwrap();
-        assert_eq!(path.len(), 5);
+        assert_eq!(path.len(), 11);
         assert_eq!(path.first(), Some(&Point(0, 0)));
         assert_eq!(path.last(), Some(&Point(5, 5)));
     }

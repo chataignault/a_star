@@ -74,7 +74,7 @@ fn path_finder_manhattan_2d(
         for &(dx, dy) in &[(0, 1), (1, 0), (0, -1), (-1, 0)] {
             let x = p.0 + dx;
             let y = p.1 + dy;
-            if x >= 0 && x <= 2 && y >= 0 && y <= 2 {
+            if x.abs() <= goal.0.abs() && y.abs() <= goal.1.abs() {
                 n.push(Point(x, y));
             }
         }
