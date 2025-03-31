@@ -100,7 +100,7 @@ mod tests {
     #[test]
     fn test_2d_grid() {
         let start = Point(0, 0);
-        let goal = Point(2, 2);
+        let goal = Point(5, 5);
 
         // Manhattan distance heuristic
         let h = |p: &Point| (goal.0 - p.0).abs() as f64 + (goal.1 - p.1).abs() as f64;
@@ -127,7 +127,7 @@ mod tests {
         let path = path.unwrap();
         assert_eq!(path.len(), 5);
         assert_eq!(path.first(), Some(&Point(0, 0)));
-        assert_eq!(path.last(), Some(&Point(2, 2)));
+        assert_eq!(path.last(), Some(&Point(5, 5)));
     }
 
     #[test]
