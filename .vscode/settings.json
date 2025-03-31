@@ -1,5 +1,8 @@
 {
     "rust-analyzer.server.extraEnv": {
         "PYO3_PYTHON": "C:/code/a_star/.venv/Scripts/python.exe"
-    }
+    },
+    "rust-analyzer.runnables.extraEnv": {
+        "PYO3_PYTHON": "C:/code/a_star/.venv/Scripts/python.exe"
+    },
 }

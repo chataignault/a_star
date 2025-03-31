@@ -5,4 +5,5 @@ __pycache__
 *.pyd
 
 Cargo.lock
+uv.lock
 
