@@ -11,6 +11,14 @@ struct PyState {
     cost: f64,
 }
 
+#[pymethods]
+impl PyState {
+    #[new]
+    fn new(node: PyObject, cost: f64) -> Self {
+        PyState { node, cost }
+    }
+}
+
 // #[pyfunction]
 // fn path_finder(py_start: &PyState, py_goal: &PyState, py_neighbors:PyObject, py_h:PyObject, py_d: PyObject) -> PyResult<PyState> {
 //     let start = State {
